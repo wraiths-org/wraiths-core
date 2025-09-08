@@ -42,7 +42,7 @@ jobs:
       - name: Build Docker (if Dockerfile exists)
         if: hashFiles(/Dockerfile) != 
         run: docker build -t ghcr.io/${{ github.repository }}:${{ github.sha }} .
-  # Reusable CodeQL call
-  codeql:
-    if: ${{ github.event_name == pull_request || github.ref == refs/heads/main }}
-    uses: github/codeql-action/.github/workflows/codeql.yml@v3
+    # Reusable CodeQL call
+    codeql:
+      if: ${{ github.event_name == pull_request || github.ref == refs/heads/main }}
+      uses: github/codeql-action/.github/workflows/codeql.yml@v3
