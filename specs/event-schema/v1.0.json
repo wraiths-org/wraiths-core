@@ -1,0 +1,58 @@
+{
+  "$id": "https://github.com/wraiths-org/wraiths-core/specs/event-schema/v1.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WRAITHS Event v1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "subject": {
+      "type": "string",
+      "pattern": "^tool\\.(invoke|result)\\.(recon|web|bluetooth|sdr|exploitation|forensics|malware|wireless|mobile|anonymity)\\.[a-z0-9_]+$"
+    },
+    "id": { "type": "string", "format": "uuid" },
+    "correlation_id": { "type": "string", "format": "uuid" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "parameters": { "type": "object", "additionalProperties": true },
+    "result": { "type": "object", "additionalProperties": true },
+    "error": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "code": { "type": "integer" },
+        "message": { "type": "string" },
+        "details": { "type": "object", "additionalProperties": true }
+      },
+      "required": [ "message" ]
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "producer": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    }
+  },
+  "required": [ "subject", "timestamp" ],
+  "allOf": [
+    {
+      "if": { "properties": { "subject": { "pattern": "^tool\\.invoke\\." } }, "required": [ "subject" ] },
+      "then": {
+        "required": [ "id", "parameters" ],
+        "not": {
+          "anyOf": [ { "required": [ "result" ] }, { "required": [ "error" ] } ]
+        }
+      }
+    },
+    {
+      "if": { "properties": { "subject": { "pattern": "^tool\\.result\\." } }, "required": [ "subject" ] },
+      "then": {
+        "required": [ "correlation_id" ],
+        "oneOf": [
+          { "required": [ "result" ] },
+          { "required": [ "error" ] }
+        ]
+      }
+    }
+  ]
+}

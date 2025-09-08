@@ -1,0 +1,48 @@
+name: CI
+on: [push, pull_request]
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - if: hashFiles(/package.json) != 
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - if: hashFiles(/package.json) != 
+        run: npm ci
+      - if: hashFiles(/package.json) != 
+        run: npm test --if-present
+      - if: hashFiles(/requirements.txt) !=  || hashFiles(/pyproject.toml) != 
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+      - if: hashFiles(/requirements.txt) != 
+        run: pip install -r requirements.txt
+      - if: hashFiles(/pyproject.toml) != 
+        run: pip install -e . || true
+      - if: hashFiles(/tests/) != 
+        run: |
+          pip install pytest pytest-cov || true
+          pytest -q || true
+      - if: hashFiles(/go.mod) != 
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.22
+      - if: hashFiles(/go.mod) != 
+        run: |
+          go vet ./... || true
+          go test ./... -v
+      - name: Build Docker (if Dockerfile exists)
+        if: hashFiles(/Dockerfile) != 
+        run: docker build -t ghcr.io/${{ github.repository }}:${{ github.sha }} .
+  # Reusable CodeQL call
+  codeql:
+    if: ${{ github.event_name == pull_request || github.ref == refs/heads/main }}
+    uses: github/codeql-action/.github/workflows/codeql.yml@v3

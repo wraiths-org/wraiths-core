@@ -1,0 +1,30 @@
+{
+  "name": "WRAITHS Dev",
+  "image": "mcr.microsoft.com/devcontainers/base:jammy",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" },
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.11" },
+    "ghcr.io/devcontainers/features/go:1": { "version": "1.22" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "github.copilot",
+        "github.copilot-chat",
+        "ms-azuretools.vscode-docker",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "golang.Go",
+        "esbenp.prettier-vscode",
+        "DavidAnson.vscode-markdownlint",
+        "ms-vscode.makefile-tools"
+      ]
+    }
+  },
+  "forwardPorts": [4222, 8000, 3000],
+  "onCreateCommand": "bash -lc \"set -e; sudo apt-get update; sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends bluez bluez-tools libbluetooth-dev rtl-sdr hackrf gnuradio sox tshark nmap sqlmap masscan && sudo rm -rf /var/lib/apt/lists/*\"",
+  "postCreateCommand": "bash -lc \"git submodule update --init --recursive || true; python -m pip install -U pip && pip install fastapi uvicorn[standard] nats-py pydantic pytest || true\"",
+  "remoteUser": "vscode"
+}

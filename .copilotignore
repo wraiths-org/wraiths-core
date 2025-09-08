@@ -1,0 +1,17 @@
+.env
+/.env
+secrets/*
+node_modules/**
+dist/**
+build/**
+coverage/**
+pycache/**
+*.pyc
+*.pem
+*.key
+*.crt
+*.p12
+.pfx
+.jks
+Dockerfile.local
+devdata/

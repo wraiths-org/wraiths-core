@@ -1,0 +1,10 @@
+https://raw.githubusercontent.com/wraiths-org/wraiths-core/main/specs/event-schema/v1.0.json
+https://docs.nats.io/
+https://docs.nats.io/using-nats/developer/develop_jetstream
+https://fastapi.tiangolo.com/
+https://docs.pydantic.dev/latest/
+https://docs.github.com/actions
+https://docs.github.com/codespaces
+https://docs.docker.com/
+https://wiki.gnuradio.org/index.php/Main_Page
+http://www.bluez.org/
