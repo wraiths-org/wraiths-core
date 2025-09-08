@@ -1,0 +1,39 @@
+[submodule "frameworks/recon"]
+	path = frameworks/recon
+	url = https://github.com/wraiths-org/wraiths-recon.git
+[submodule "frameworks/bluetooth"]
+	path = frameworks/bluetooth
+	url = https://github.com/wraiths-org/wraiths-bluetooth.git
+[submodule "frameworks/sdr"]
+	path = frameworks/sdr
+	url = https://github.com/wraiths-org/wraiths-sdr.git
+[submodule "frameworks/web"]
+	path = frameworks/web
+	url = https://github.com/wraiths-org/wraiths-web.git
+[submodule "frameworks/exploitation"]
+	path = frameworks/exploitation
+	url = https://github.com/wraiths-org/wraiths-exploitation.git
+[submodule "frameworks/forensics"]
+	path = frameworks/forensics
+	url = https://github.com/wraiths-org/wraiths-forensics.git
+[submodule "frameworks/data"]
+	path = frameworks/data
+	url = https://github.com/wraiths-org/wraiths-data.git
+[submodule "frameworks/anonymity"]
+	path = frameworks/anonymity
+	url = https://github.com/wraiths-org/wraiths-anonymity.git
+[submodule "frameworks/immersion"]
+	path = frameworks/immersion
+	url = https://github.com/wraiths-org/wraiths-immersion.git
+[submodule "frameworks/toolkit"]
+	path = frameworks/toolkit
+	url = https://github.com/wraiths-org/wraiths-toolkit.git
+[submodule "frameworks/malware"]
+	path = frameworks/malware
+	url = https://github.com/wraiths-org/wraiths-malware.git
+[submodule "frameworks/wireless"]
+	path = frameworks/wireless
+	url = https://github.com/wraiths-org/wraiths-wireless.git
+[submodule "frameworks/mobile"]
+	path = frameworks/mobile
+	url = https://github.com/wraiths-org/wraiths-mobile.git
