@@ -42,11 +42,28 @@ uvicorn src.main:app --reload
 
 4. Access the API documentation at `http://localhost:8000/docs`
 
+Key endpoints:
+
+- `GET /health` – service health and version
+- `GET /version` – detailed build metadata (service, version, commit, branch, build_time, environment)
+
 ### Docker Development
 
 ```bash
 docker build -t wraiths-core .
 docker run -p 8000:8000 wraiths-core
+```
+
+### Developer Shortcuts
+
+This repo includes a simple `Makefile`:
+
+```bash
+make install   # pip install -r requirements.txt
+make test      # run pytest
+make run       # uvicorn src.main:app --reload
+make lint      # flake8
+make format    # black & isort
 ```
 
 ## 📋 Project Structure
@@ -88,6 +105,15 @@ This project includes comprehensive Cursor AI configuration:
 - `SERVICE_PORT`: Port to bind the service (default: 8000)
 - `LOG_LEVEL`: Logging level (DEBUG, INFO, WARN, ERROR)
 - `ENVIRONMENT`: Deployment environment (dev, staging, prod)
+- `LOG_LEVEL`: Logging level (DEBUG, INFO, WARN, ERROR)
+- `SERVICE_PORT`: HTTP port (default: 8000)
+- `DEFAULT_CORRELATION_ID`: Fallback correlation id when header is missing
+
+### Correlation ID and Logging
+
+- Requests may include `x-correlation-id` header. The server echoes this header in responses.
+- If missing, a lightweight id is generated and returned as `x-correlation-id`.
+- All requests are logged via `structlog` with JSON, including `method`, `path`, `status_code`, and `duration_ms`.
 
 ### Event Schema
 
@@ -186,6 +212,13 @@ Quick commands:
 pip install -r requirements.txt
 pytest -q
 uvicorn src.main:app --reload
+```
+
+Optional developer setup:
+
+```bash
+pip install pre-commit
+pre-commit install
 ```
 
 ### Git LFS Notes
