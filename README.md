@@ -46,6 +46,7 @@ Key endpoints:
 
 - `GET /health` – service health and version
 - `GET /version` – detailed build metadata (service, version, commit, branch, build_time, environment)
+- `GET /ready` – readiness probe (returns 200 when ready, 503 otherwise)
 
 ### Docker Development
 
@@ -68,7 +69,7 @@ make format    # black & isort
 
 ## 📋 Project Structure
 
-```
+```text
 wraiths-core/
 ├── src/                    # Application source code
 ├── tests/                  # Test suites
@@ -108,6 +109,10 @@ This project includes comprehensive Cursor AI configuration:
 - `LOG_LEVEL`: Logging level (DEBUG, INFO, WARN, ERROR)
 - `SERVICE_PORT`: HTTP port (default: 8000)
 - `DEFAULT_CORRELATION_ID`: Fallback correlation id when header is missing
+- `CORS_ORIGINS`: Comma-separated allowed origins (default: `*` in dev, tightened in prod)
+- `ALLOWED_HOSTS`: Comma-separated trusted hosts for Host header (optional)
+- `OTEL_ENABLED`: Enable OpenTelemetry instrumentation (true/false)
+- `OTEL_EXPORTER_OTLP_ENDPOINT`: OTLP HTTP endpoint for tracing exporter
 
 You can copy `.env.example` to `.env` and adjust:
 
@@ -122,6 +127,10 @@ cp .env.example .env
 - Requests may include `x-correlation-id` header. The server echoes this header in responses.
 - If missing, a lightweight id is generated and returned as `x-correlation-id`.
 - All requests are logged via `structlog` with JSON, including `method`, `path`, `status_code`, and `duration_ms`.
+
+### Security Headers
+
+- Responses include basic hardening headers: `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, and in non-dev `Strict-Transport-Security`.
 
 ### Event Schema
 

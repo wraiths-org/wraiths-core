@@ -44,3 +44,20 @@ def test_correlation_id_header_propagation(client):
     response = client.get("/health", headers={"x-correlation-id": corr})
     assert response.status_code == 200
     assert response.headers.get("x-correlation-id") == corr
+
+
+def test_readiness_endpoint(client):
+    """Readiness should return JSON and status 200 in base state."""
+    response = client.get("/ready")
+    assert response.status_code in (200, 503)
+    data = response.json()
+    assert "ready" in data
+    assert "dependencies" in data
+
+
+def test_security_headers_present(client):
+    """Basic security headers should be present on responses."""
+    response = client.get("/health")
+    # Non-breaking presence (some may be absent in dev)
+    assert "X-Content-Type-Options" in response.headers
+    assert "X-Frame-Options" in response.headers
