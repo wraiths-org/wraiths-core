@@ -109,6 +109,14 @@ This project includes comprehensive Cursor AI configuration:
 - `SERVICE_PORT`: HTTP port (default: 8000)
 - `DEFAULT_CORRELATION_ID`: Fallback correlation id when header is missing
 
+You can copy `.env.example` to `.env` and adjust:
+
+
+```bash
+cp .env.example .env
+# edit .env
+```
+
 ### Correlation ID and Logging
 
 - Requests may include `x-correlation-id` header. The server echoes this header in responses.

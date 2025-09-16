@@ -10,12 +10,15 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import Response
 import structlog
+import logging
 from contextlib import asynccontextmanager
 import os
 import subprocess
 from datetime import datetime, timezone
 
 # Configure structured logging
+log_level = os.getenv("LOG_LEVEL", "INFO").upper()
+logging.basicConfig(level=getattr(logging, log_level, logging.INFO))
 structlog.configure(
     processors=[
         structlog.stdlib.filter_by_level,
@@ -157,4 +160,5 @@ async def version_info():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.getenv("SERVICE_PORT", "8000"))
+    uvicorn.run(app, host="0.0.0.0", port=port)
