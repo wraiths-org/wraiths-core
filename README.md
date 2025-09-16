@@ -171,6 +171,23 @@ The project includes GitHub Actions workflows for:
 - **Architecture**: See `cursor.prompts/system.architect.md`
 - **Templates**: Development templates in `cursor.prompts/`
 
+## 🤖 Cursor Handoff Notes
+
+Cursor is configured with project rules, prompts, and context URLs. To start coding with Cursor:
+
+1. Open this repository in Cursor.
+2. Review `cursor.project.rules.md` and the prompts in `cursor.prompts/`.
+3. Use the provided schema at `specs/event-schema/v1.0.json` when creating or consuming events.
+4. Generate code only in `src/`, `tests/`, or `docs/` per project rules.
+
+Quick commands:
+
+```bash
+pip install -r requirements.txt
+pytest -q
+uvicorn src.main:app --reload
+```
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -7,6 +7,7 @@ Main FastAPI application entry point for the WRAITHS cybersecurity platform.
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import structlog
+from contextlib import asynccontextmanager
 
 # Configure structured logging
 structlog.configure(
@@ -29,6 +30,16 @@ structlog.configure(
 
 logger = structlog.get_logger(__name__)
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Application lifespan context replacing deprecated on_event hooks."""
+    logger.info("WRAITHS Core application starting up")
+    try:
+        yield
+    finally:
+        logger.info("WRAITHS Core application shutting down")
+
+
 # Create FastAPI application
 app = FastAPI(
     title="WRAITHS Core",
@@ -36,6 +47,7 @@ app = FastAPI(
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
 # Add CORS middleware
@@ -61,18 +73,6 @@ async def health_check():
         "service": "wraiths-core",
         "version": "1.0.0"
     }
-
-
-@app.on_event("startup")
-async def startup_event():
-    """Initialize application on startup."""
-    logger.info("WRAITHS Core application starting up")
-
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Cleanup on application shutdown."""
-    logger.info("WRAITHS Core application shutting down")
 
 
 if __name__ == "__main__":
