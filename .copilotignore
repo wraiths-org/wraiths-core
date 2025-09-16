@@ -1,17 +1,18 @@
+<<<<<<< HEAD
 .env
 /.env
 secrets/*
-node_modules/**
-dist/**
-build/**
-coverage/**
-pycache/**
 *.pyc
 *.pem
-*.key
-*.crt
-*.p12
-.pfx
-.jks
-Dockerfile.local
-devdata/
+.env.*
+# Sensitive files and directories
+logs/
+
+# Database files
+*.db
+*.sqlite
+
+# Temporary files
+*.tmp
+*.temp
+>>>>>>> 0275fec (chore: prepare workspace for cursor handoff, remove unneeded extensions, clean state)

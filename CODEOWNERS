@@ -1,0 +1,35 @@
+# Code Owners for WRAITHS Project
+
+# Global owners
+* @wraiths-org/core-team
+
+# Framework-specific owners
+/frameworks/recon/ @wraiths-org/recon-team
+/frameworks/exploitation/ @wraiths-org/exploitation-team
+/frameworks/forensics/ @wraiths-org/forensics-team
+/frameworks/malware/ @wraiths-org/malware-team
+/frameworks/mobile/ @wraiths-org/mobile-team
+/frameworks/web/ @wraiths-org/web-team
+/frameworks/wireless/ @wraiths-org/wireless-team
+/frameworks/bluetooth/ @wraiths-org/bluetooth-team
+/frameworks/sdr/ @wraiths-org/sdr-team
+/frameworks/anonymity/ @wraiths-org/anonymity-team
+/frameworks/data/ @wraiths-org/data-team
+/frameworks/immersion/ @wraiths-org/immersion-team
+/frameworks/toolkit/ @wraiths-org/toolkit-team
+
+# Infrastructure and CI/CD
+/.github/ @wraiths-org/devops-team
+/Dockerfile @wraiths-org/devops-team
+/docker-compose.yml @wraiths-org/devops-team
+/.devcontainer/ @wraiths-org/devops-team
+
+# Documentation
+/docs/ @wraiths-org/docs-team
+/README.md @wraiths-org/docs-team
+/cursor.prompts/ @wraiths-org/docs-team
+
+# Configuration
+/cursor.project.rules.md @wraiths-org/core-team
+/.mcp.json @wraiths-org/core-team
+/pyproject.toml @wraiths-org/core-team

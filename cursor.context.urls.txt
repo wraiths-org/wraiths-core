@@ -1,4 +1,4 @@
-https://raw.githubusercontent.com/wraiths-org/wraiths-core/main/specs/event-schema/v1.0.json
+https://github.com/wraiths-org/wraiths-core/specs/event-schema/v1.0.json
 https://docs.nats.io/
 https://docs.nats.io/using-nats/developer/develop_jetstream
 https://fastapi.tiangolo.com/

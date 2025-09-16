@@ -1,5 +1,11 @@
 {
   "mcpServers": {
-    "Figma": { "url": "http://127.0.0.1:3845/sse" }
+    "Figma": {
+      "url": "http://127.0.0.1:3845/sse"
+    },
+    "Linear": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"]
+    }
   }
 }
