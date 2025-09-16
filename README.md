@@ -188,6 +188,37 @@ pytest -q
 uvicorn src.main:app --reload
 ```
 
+### Git LFS Notes
+
+This repository has Git LFS hooks enabled. If pushes fail due to missing LFS, install and initialize LFS locally:
+
+- macOS (Homebrew):
+
+  ```bash
+  brew install git-lfs
+  git lfs install
+  ```
+
+- Debian/Ubuntu:
+
+  ```bash
+  sudo apt-get install -y git-lfs
+  git lfs install
+  ```
+
+- Alpine (with permissions):
+
+  ```bash
+  apk add --no-cache git-lfs
+  git lfs install
+  ```
+
+If pushing from an environment without LFS and you need to proceed urgently, you can bypass hooks once:
+
+```bash
+git push --no-verify origin main
+```
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

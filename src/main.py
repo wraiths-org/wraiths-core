@@ -8,6 +8,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import structlog
 from contextlib import asynccontextmanager
+import os
 
 # Configure structured logging
 structlog.configure(
@@ -33,11 +34,18 @@ logger = structlog.get_logger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan context replacing deprecated on_event hooks."""
-    logger.info("WRAITHS Core application starting up")
+    env = os.getenv("ENVIRONMENT", "dev")
+    service = "wraiths-core"
+    version = "1.0.0"
+    log = logger.bind(service=service, environment=env, version=version)
+    app.state.started = False
+    log.info("WRAITHS Core application starting up")
+    app.state.started = True
     try:
         yield
     finally:
-        logger.info("WRAITHS Core application shutting down")
+        app.state.started = False
+        log.info("WRAITHS Core application shutting down")
 
 
 # Create FastAPI application
