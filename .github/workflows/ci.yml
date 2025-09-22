@@ -42,7 +42,7 @@ jobs:
         run: docker build -t ghcr.io/wraiths-org/wraiths-core:${{ github.sha }} .
 
       - name: Scan for vulnerabilities (Trivy)
-        uses: aquasecurity/trivy-action@0.20.0
+        uses: aquasecurity/trivy-action@0.33.1
         with:
           image-ref: ghcr.io/wraiths-org/wraiths-core:${{ github.sha }}
           format: 'sarif'
